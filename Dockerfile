@@ -23,7 +23,10 @@
 FROM jenkins/slave:latest
 MAINTAINER Oleg Nenashev <o.v.nenashev@gmail.com>
 LABEL Description="This is a base image, which allows connecting Jenkins agents via JNLP protocols" Vendor="Jenkins project" Version="3.27"
-
+USER root
+RUN apt update -y
+RUN apt install maven -y
+USER jenkins
 COPY jenkins-slave /usr/local/bin/jenkins-slave
 
 ENTRYPOINT ["jenkins-slave"]
